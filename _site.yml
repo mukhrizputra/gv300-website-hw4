@@ -2,12 +2,13 @@ name: "GV300 website"
 title: "Ahmad Mukhriz Putra"
 description: |
   My Website
-output_dir: "docs"
 
 navbar:
   right:
     - text: "Home"
       href: index.html
+    - text: "Landing"
+      href: landing.html
     - text: "Showcase"
       href: showcase.html
 
