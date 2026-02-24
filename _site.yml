@@ -1,12 +1,14 @@
-name: "gv300-website-hw4-test1"
-title: "My Website"
+name: "GV300 website"
+title: "Ahmad Mukhriz Putra"
 description: |
   My Website
-output_dir: "_site"
+output_dir: "docs"
+
 navbar:
   right:
     - text: "Home"
       href: index.html
-    - text: "About"
-      href: about.html
+    - text: "Showcase"
+      href: showcase.html
+
 output: distill::distill_article
