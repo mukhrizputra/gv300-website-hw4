@@ -1,0 +1,15 @@
+---
+title: "Ahmad Mukhriz Putra"
+description: "BSc Economics & Politics | University of Essex"
+output: distill::distill_article
+---
+
+## About Me
+
+I am a final-year BSc Economics and Politics student at the University of Essex.  
+This website showcases my work from GV300.
+
+## Pages
+
+- [Landing Page](landing.html)
+- [GV300 Showcase](showcase.html)

@@ -1,0 +1,70 @@
+---
+title: "GV300 Showcase"
+description: "Example code + visualisation work from GV300"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+
+# Load your dataset
+kidiq <- read.csv("kidiq.csv")
+```
+
+## Introduction
+
+This page presents a data visualisation from a previous GV300 assignment. 
+The aim of the analysis was to examine how maternal characteristics influence children's test scores.
+
+Below is an example of the code used and the resulting visualisation.
+
+
+```{r supermoms-plot, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+
+kidiq_plot <- kidiq %>%
+  filter(!is.na(work_status), !is.na(kid_score), !is.na(family_advantage), !is.na(iq_group)) %>%
+  mutate(
+    work_status = factor(work_status),
+    family_advantage = factor(family_advantage),
+    iq_group = factor(iq_group)
+  )
+
+overall_mean <- mean(kidiq_plot$kid_score, na.rm = TRUE)
+
+your_plot <- ggplot(kidiq_plot, aes(x = work_status, y = kid_score, fill = family_advantage)) +
+  geom_violin(trim = FALSE, alpha = 0.85, color = "grey30") +
+  geom_boxplot(width = 0.12, outlier.shape = NA, alpha = 0.35, color = "grey20") +
+  geom_hline(yintercept = overall_mean, linetype = "dashed", linewidth = 0.5) +
+  facet_wrap(~ iq_group) +
+  scale_fill_brewer(palette = "RdYlBu", direction = -1) +
+  labs(
+    title    = "SuperMoms: Maternal Advantage",
+    subtitle = "Kids thrive when mothers combine education and steady work,\nrevealing how opportunity compounds across generations.",
+    x        = "Mother's work status",
+    y        = "Child's test score",
+    fill     = "Family advantage",
+    caption  = "Note: dashed line shows the overall mean child score."
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position  = "bottom",
+    plot.title       = element_text(face = "bold", size = 16),
+    plot.subtitle    = element_text(size = 12),
+    axis.text.x      = element_text(angle = 20, hjust = 1),
+    strip.text       = element_text(face = "bold")
+  )
+
+your_plot
+```
+
+- The code first calculates the overall mean child test score and stores it as a reference value. 
+- It then creates a violin plot showing the distribution of children’s test scores across different categories of maternal work status, with colours representing levels of family advantage. 
+- The violin shapes display the full distribution of scores within each group, allowing us to see variation, density, and spread rather than just averages. 
+- A dashed horizontal line marks the overall mean score, making it easier to compare each group to the sample average. 
+- The plot is further divided into panels by maternal IQ group, which allows us to examine whether patterns differ across levels of maternal cognitive ability.
+- The figure shows that children from more advantaged families generally tend to achieve higher test scores, and that work status appears to interact with this advantage. 
+- Differences across IQ groups suggest that while maternal ability may matter, structural factors such as education, employment, and family resources also play a significant role. 
+- Overall, the visualisation highlights how socioeconomic advantages can accumulate across generations.

@@ -1,0 +1,10 @@
+---
+title: "Ahmad Mukhriz Putra"
+output: postcards::trestles
+---
+
+BSc Economics & Politics | University of Essex
+
+Interested in political economy and quantitative analysis.
+
+[View my GV300 Showcase](showcase.html)
