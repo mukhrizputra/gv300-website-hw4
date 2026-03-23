@@ -6,6 +6,6 @@ output: distill::distill_article
 
 BSc Economics & Politics | University of Essex
 
-Interested in political economy and quantitative analysis.
+A young aspiring student who is interested in the political economy and quantitative analysis.
 
 [View my GV300 Showcase](showcase.html)
