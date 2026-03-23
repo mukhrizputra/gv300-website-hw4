@@ -1,0 +1,95 @@
+---
+title: "Text Analysis: Understanding Political Language"
+description: "A simple text analysis exploring word frequency and sentiment in political-style text."
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(tidytext)
+library(textdata)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## Overview
+
+In this section, I demonstrate a basic text analysis using R. The goal is to explore how language is used in political and economic statements by identifying the most frequent words and analysing sentiment.
+Text analysis is important in political economy because it allows researchers to systematically study narratives, framing, and discourse in speeches, media, and policy documents.
+Data
+For this example, I use a small sample of political-style statements:
+
+```{r}
+text_data <- tibble(text = c(
+  "Economic growth improves living standards and reduces poverty",
+  "Inequality remains a major challenge in modern economies",
+  "Government policy should promote stability and development",
+  "Financial crises create instability and unemployment",
+  "Strong institutions support democracy and economic growth"
+))
+```
+
+## Word Frequency Analysis
+
+First, I clean and break the text into individual words, removing common stopwords such as 'the' and 'and'.
+
+```{r}
+tidy_words <- text_data %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words)
+
+word_counts <- tidy_words %>%
+  count(word, sort = TRUE)
+
+word_counts
+```
+
+## Visualisation
+
+```{r}
+ggplot(word_counts %>% top_n(10), 
+       aes(x = reorder(word, n), y = n)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Most Common Words in Political Text",
+    subtitle = "Word frequency after removing stopwords",
+    x = "Words",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+```
+
+## Sentiment Analysis
+
+Next, I analyse whether the language used is generally positive or negative.
+
+```{r}
+sentiment <- tidy_words %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(sentiment)
+
+sentiment
+```
+
+
+## Visualisation
+
+```{r}
+ggplot(sentiment, aes(x = sentiment, y = n)) +
+  geom_col() +
+  labs(
+    title = "Sentiment Analysis of Text",
+    subtitle = "Positive vs Negative Word Counts",
+    x = "Sentiment",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+
+## Interpretation
+
+The results show that words such as “growth”, “economic”, and “stability” appear frequently, suggesting a strong focus on economic performance and institutional strength.
+The sentiment analysis indicates that the language is generally balanced but leans slightly positive, reflecting how political and economic discourse often emphasises progress, development, and stability.
+This demonstrates how text analysis can be used to uncover underlying themes and tone in political communication.
+

@@ -1,6 +1,7 @@
 ---
 title: "Ahmad Mukhriz Putra"
-output: postcards::trestles
+description: "Landing page"
+output: distill::distill_article
 ---
 
 BSc Economics & Politics | University of Essex
