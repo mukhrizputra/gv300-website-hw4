@@ -13,4 +13,5 @@ This website showcases my work from GV300.
 
 - [Landing Page](landing.html)
 - [GV300 Showcase](showcase.html)
+- [Text Analysis](text-analysis.html)
 
